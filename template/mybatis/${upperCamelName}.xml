@@ -9,6 +9,15 @@
 
     <select id="load${table.upperCamelName}" resultMap="${table.lowerCamelName}Result">
         select * from ${table.tableName}
+        <where>
+            <trim suffixOverrides=",">
+            <%table.fieldArray.filter(function(field){return !field.sqIgnore}).forEach(function(field,index){%>
+            <if test="${field.lowerCamelName}!=null">
+                `${field.fieldName}`=#{${field.lowerCamelName}},<%})%>
+            </if>
+            </trim>
+        </where>
+
     </select>
 
     <insert id="insert${table.upperCamelName}" parameterType="${table.lowerCamelName}VO" useGeneratedKeys="true" keyProperty="id">
