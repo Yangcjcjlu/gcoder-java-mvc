@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Slf4j
-@RequestMapping("/api/v1/${table.tableName}")
+@RequestMapping("/api/v1/${table.tableName}s")
 @RestController
 public class ${table.upperCamelName}Controller extends BaseController {
 
