@@ -13,8 +13,8 @@
             <trim suffixOverrides=",">
             <%table.fieldArray.filter(function(field){return !field.sqIgnore}).forEach(function(field,index){%>
             <if test="${field.lowerCamelName}!=null">
-                `${field.fieldName}`=#{${field.lowerCamelName}},<%})%>
-            </if>
+                `${field.fieldName}`=#{${field.lowerCamelName}}, </if><%})%>
+
             </trim>
         </where>
 
