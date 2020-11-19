@@ -32,7 +32,7 @@
         </where>
     </select>
 
-    <insert id="insert${table.upperCamelName}" parameterType="${table.lowerCamelName}VO" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert${table.upperCamelName}" parameterType="${table.lowerCamelName}BO" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO `${table.tableName}` (
              <trim suffixOverrides=","><%table.fieldArray.filter(function(field){return !field.sqIgnore}).forEach(function(field,index){%>
             <if test="${field.lowerCamelName}!=null">`${field.fieldName}`,</if><%})%>
@@ -56,7 +56,7 @@
           id=#{id}
     </update>
 
-    <update id="delete${table.upperCamelName}" parameterType="${table.lowerCamelName}VO">
+    <update id="delete${table.upperCamelName}" parameterType="${table.lowerCamelName}BO">
         update `${table.tableName}`
         SET
             data_status = 0,
