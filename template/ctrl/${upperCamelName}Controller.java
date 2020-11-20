@@ -43,6 +43,7 @@ public class ${table.upperCamelName}Controller extends BaseController {
     @ApiOperation(value = "创建")
     public ResponseData create(@RequestBody ${table.upperCamelName}BO ${table.lowerCamelName}BO) throws Exception {
         this.${table.lowerCamelName}Service.create(${table.lowerCamelName}BO);
+        super.setCreatedInfo(${table.lowerCamelName}BO);
         return ResponseDataUtil.buildSuccess();
     }
 
@@ -50,8 +51,7 @@ public class ${table.upperCamelName}Controller extends BaseController {
     @ApiOperation(value = "修改")
     public ResponseData create(@PathVariable Long id, @RequestBody ${table.upperCamelName}BO ${table.lowerCamelName}BO) throws Exception {
         ${table.lowerCamelName}BO.setId(id);
-        ${table.lowerCamelName}BO.setModifiedBy(CoreUtil.getUserId());
-        ${table.lowerCamelName}BO.setModifiedDate(new Date());
+        super.setModifiedInfo(${table.lowerCamelName}BO);
         this.${table.lowerCamelName}Service.update(${table.lowerCamelName}BO);
         return ResponseDataUtil.buildSuccess();
     }
@@ -61,8 +61,7 @@ public class ${table.upperCamelName}Controller extends BaseController {
     public ResponseData delete(@PathVariable Long id) throws Exception {
         ${table.upperCamelName}BO ${table.lowerCamelName}BO = new ${table.upperCamelName}BO();
         ${table.lowerCamelName}BO.setId(id);
-        ${table.lowerCamelName}BO.setModifiedBy(CoreUtil.getUserId());
-        ${table.lowerCamelName}BO.setModifiedDate(new Date());
+        super.setModifiedInfo(${table.lowerCamelName}BO);
         this.${table.lowerCamelName}Service.delete(${table.lowerCamelName}BO);
         return ResponseDataUtil.buildSuccess();
     }
