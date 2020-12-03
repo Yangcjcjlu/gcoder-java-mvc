@@ -31,19 +31,27 @@ public class ${table.upperCamelName}Controller extends BaseController {
 
     @GetMapping("")
     @ApiOperation(value = "搜索")
-    public ResponseData search(HttpServletRequest request) throws Exception {
+    public ResponseData search(HttpServletRequest request,
+                                @RequestParam(required = false) String pi,
+                                @RequestParam(required = false) String ps
+        ) throws Exception {
         ParamsBuilder paramsBuilder = ParamsBuilder.newBuild();
-        Pagination pagination = super.buildPage(request);
+        if (pi != null && ps != null){
+        Pagination pagination=super.buildPage(request);
         pagination.setParams(paramsBuilder.build());
-        List<${table.upperCamelName}BO> ${table.lowerCamelName}BOList = this.${table.lowerCamelName}Service.queryForPage(pagination);
+        List<${table.upperCamelName}BO>${table.lowerCamelName}BOList=this.${table.lowerCamelName}Service.queryForPage(pagination);
+        return ResponseDataUtil.buildSuccess(${table.lowerCamelName}BOList,pagination);
+        }else{
+        List<${table.upperCamelName}BO>${table.lowerCamelName}BOList=this.${table.lowerCamelName}Service.query(paramsBuilder.build());
         return ResponseDataUtil.buildSuccess(${table.lowerCamelName}BOList);
+        }
     }
 
     @PostMapping("")
     @ApiOperation(value = "创建")
     public ResponseData create(@RequestBody ${table.upperCamelName}BO ${table.lowerCamelName}BO) throws Exception {
-        this.${table.lowerCamelName}Service.create(${table.lowerCamelName}BO);
         super.setCreatedInfo(${table.lowerCamelName}BO);
+        this.${table.lowerCamelName}Service.create(${table.lowerCamelName}BO);
         return ResponseDataUtil.buildSuccess();
     }
 
