@@ -25,6 +25,7 @@ public class ${table.upperCamelName}Controller extends BaseController {
     @ApiOperation(value = "查询")
     public ResponseData get(@PathVariable Long id) throws Exception {
         ParamsBuilder paramsBuilder = ParamsBuilder.newBuild();
+        paramsBuilder.addParams("id",id);
         ${table.upperCamelName}BO ${table.lowerCamelName}BO = this.${table.lowerCamelName}Service.get(paramsBuilder.build());
         return ResponseDataUtil.buildSuccess(${table.lowerCamelName}BO);
     }
